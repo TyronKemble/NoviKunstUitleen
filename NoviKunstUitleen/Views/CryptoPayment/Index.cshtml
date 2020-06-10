@@ -1,0 +1,88 @@
+﻿@model NoviKunstUitleen.ViewModel.CryptoViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".depositCrypto").click(function () {
+            userName = $(this).val();
+            console.log("test")
+            $.get("/CryptoPayment/Deposit", { "userName": userName},
+                function () {
+                        window.location.reload();
+                }
+            ); 
+        })
+
+        $(".withDrawCrypto").click(function () {
+            userName = $(this).val();
+            withDraw = $("#WithDrawAmount").val();
+
+            $.get("/CryptoPayment/WithDraw", { "withDraw": withDraw },
+                function () {
+                    window.location.reload();
+                }
+
+            ); 
+        })
+
+    })
+
+    var request = new XMLHttpRequest()
+    function EthToEuroConverter(valNum) {
+        request.open('GET', 'https://api.coingecko.com/api/v3/coins/ethereum/tickers', true)
+        request.onload = function() {
+        // Begin accessing JSON data here
+        var data = JSON.parse(this.response)
+        if (request.status >= 200 && request.status < 400) {
+            var value = [];
+                data.tickers.forEach(eth => {
+                if (eth.target == "EUR") {
+                    value.push(eth.last)
+                    }
+                })
+                    } else {
+                        // Show error message to screen
+                        console.log('error')
+                    }
+        var num = valNum*value[0]; 
+        document.getElementById("outputETH").innerHTML=num.toFixed(2);
+        }
+        // Send request
+        request.send()
+    }
+</script>
+}
+<div class="container">
+    <h2>Hello @Model.UserName</h2>
+    <h3>Current Value: @Model.CryptoWallet </h3>
+    <h5>Choose one of the options</h5>
+    <br />
+    <div class="row">
+        <div class="col">
+            <h3>Converter ETH to Euro</h3>
+            <label>Eth</label>
+            <input  type="number" placeholder="Eth Value" oninput="EthToEuroConverter(this.value)" onchange="EthToEuroConverter(this.value)">
+            <p>Eur: <span id="outputETH"></span></p>
+        </div>
+        <div class="col">
+            <h3>Deposit</h3>
+            <p>1 Eth per deposit</p>
+            <button class="depositCrypto btn btn-success" href="" value="@User.Identity.Name">Deposit </button>
+        </div>
+        <div class="col">
+            <h3>WithDraw</h3>
+            <p>Please enter the eth amount</p>
+            <input placeholder="Example 0.11" id="WithDrawAmount" value="" />
+            <button class="withDrawCrypto btn btn-success" href="" value="@User.Identity.Name">WithDraw </button>
+            <strong hidden id="loading">Loading...</strong>
+        </div>
+    </div>
+</div>
+
+
+

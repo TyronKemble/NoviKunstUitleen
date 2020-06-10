@@ -1,0 +1,113 @@
+﻿@model  IEnumerable<NoviKunstUitleen.Models.Arts>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.IsInRole("Staffmember"))
+{
+    <p>
+        @Html.ActionLink("New Art", "New", "Arts", null, new { @class = "btn btn-primary" })
+    </p>
+}
+
+<body>
+    <div class="modal myModal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-body">
+                <div id="myArt"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<div class="container">
+    <div id="testterr" style="display:none;">
+        <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+            <div class="toast" style="position: absolute; top: 0; right: 0;">
+                <div class="toast-header">
+                    <strong class="mr-auto text-success">Item Added to Chart</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="tab-content container" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="single-product mb-60">
+                        <div class="product-img">
+                            <img src="@Url.Content(item.Image)" width="250"  alt="">
+                        </div>
+                        <div class="product-caption">
+                            @{
+                                if (User.IsInRole("Staffmember"))
+                                {
+                                    @Html.ActionLink(@item.Name, "Edit", "Arts", new { id = item.ArtsId, @class = "btn btn-success" }, null)
+                                }
+                                else
+                                {
+                                    <h5>@item.Name</h5>
+                                }
+                            }
+                            <div class="price">
+                                <ul>
+                                    <li>@item.Price Ethereum</li>
+                                    @if (item.NumbersAvailable == 0)
+                                    {
+                                        <li><p>Art is out of stock</p></li>
+                                    }
+                                    else
+                                    {
+
+                                        <li class="myToast add_to_cart">
+                                            <div>
+                                                <div>
+                                                    <button class="testerr" value="@item.ArtsId" hidden>@item.ArtsId</button>
+                                                    @if (User.IsInRole("Student"))
+                                                    {
+                                                        <button class="btn btn-primary ArtSelection" value="@item.ArtsId" data-toggle="modal" data-target=".bd-example-modal-sm">Select Date </button>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+ @section Scripts {
+<script type="text/javascript">
+
+    //function preventBack(){window.history.forward();}
+    //setTimeout("preventBack()");
+    //        window.onunload = function () { null };
+    $(document).ready(function () {
+        $(".ArtSelection").on('click', function () {
+            artId = $(this).val();
+            $("#myArt").load("/Arts/ArtsLendPeriod", { id: artId },
+                function (data) {
+                    $('.myModal').modal("show");
+
+                }
+            )
+
+        })
+    })
+
+
+
+</script>
+}

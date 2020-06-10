@@ -1,0 +1,21 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (
+
+     Html.BeginForm("Collection", "Arts", FormMethod.Post, new { id = "artCollection", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                <a class="btn btn-primary" href="javascript:document.getElementById('artCollection').submit()">Go To collection</a>
+            </ul>
+        }
+    }
+    else
+    {
+        <ul class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink",@class="btn btn-primary" })</li>
+        </ul>
+    }

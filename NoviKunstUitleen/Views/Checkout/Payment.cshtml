@@ -1,0 +1,39 @@
+﻿@model NoviKunstUitleen.ViewModel.CryptoViewModel
+
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+@section Scripts {
+<script>
+    $("#alerts").hide();
+        $(".checkoutAlert").click(function () {
+            $("#alerts").show();
+        })
+
+        $(".btnFetch").click(function() {
+            // disable button
+            $(this).prop("disabled", true);
+            // add spinner to button
+            $(this).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+            );
+         });
+</script>
+}
+
+<div class="container">
+    <h2>Payment</h2>
+
+    <p id="Eth-amount" value="@Model.TotalAmount">Total ETH Value: @Model.TotalAmount</p>
+
+    <p value="@Model.SendEthToAdress">Being Send To: @Model.SendEthToAdress</p>
+    @Html.ActionLink("Make Payment", "CheckPayment", "Checkout", new { @class = "btn btn-success checkoutAlert btnFetch" })
+    
+</div>

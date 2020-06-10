@@ -1,0 +1,874 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{99AA1CA9-98A8-4CD2-8D12-31D4BB2661DC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NoviKunstUitleen</RootNamespace>
+    <AssemblyName>NoviKunstUitleen</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44364</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.7</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.2.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.2\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.1.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.ABI, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.ABI.3.7.1\lib\net451\Nethereum.ABI.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.Accounts, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Accounts.3.7.1\lib\net451\Nethereum.Accounts.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.BlockchainProcessing, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.BlockchainProcessing.3.7.1\lib\net451\Nethereum.BlockchainProcessing.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.Contracts, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Contracts.3.7.1\lib\net451\Nethereum.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.Hex, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Hex.3.7.1\lib\net451\Nethereum.Hex.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.JsonRpc.Client, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.JsonRpc.Client.3.7.1\lib\net451\Nethereum.JsonRpc.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.JsonRpc.RpcClient, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.JsonRpc.RpcClient.3.7.1\lib\net451\Nethereum.JsonRpc.RpcClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.KeyStore, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.KeyStore.3.7.1\lib\net451\Nethereum.KeyStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.Model, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Model.3.7.1\lib\net451\Nethereum.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.RLP, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.RLP.3.7.1\lib\net451\Nethereum.RLP.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.RPC, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.RPC.3.7.1\lib\net451\Nethereum.RPC.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.Signer, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Signer.3.7.1\lib\net451\Nethereum.Signer.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.Util, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Util.3.7.1\lib\net451\Nethereum.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.Web3, Version=3.7.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Web3.3.7.1\lib\net451\Nethereum.Web3.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArtsController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\CryptoPaymentController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004140230551_InitialCreate.cs" />
+    <Compile Include="Migrations\202004140230551_InitialCreate.designer.cs">
+      <DependentUpon>202004140230551_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151123331_AddedModelsStaffmemberAndStudents.cs" />
+    <Compile Include="Migrations\202004151123331_AddedModelsStaffmemberAndStudents.designer.cs">
+      <DependentUpon>202004151123331_AddedModelsStaffmemberAndStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151128334_Delete-PasswordFromUsersModel.cs" />
+    <Compile Include="Migrations\202004151128334_Delete-PasswordFromUsersModel.designer.cs">
+      <DependentUpon>202004151128334_Delete-PasswordFromUsersModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151137479_CheckChanges.cs" />
+    <Compile Include="Migrations\202004151137479_CheckChanges.designer.cs">
+      <DependentUpon>202004151137479_CheckChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151142041_artsModelAddedToDatabase.cs" />
+    <Compile Include="Migrations\202004151142041_artsModelAddedToDatabase.designer.cs">
+      <DependentUpon>202004151142041_artsModelAddedToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151142561_InsertArtsDatabase.cs" />
+    <Compile Include="Migrations\202004151142561_InsertArtsDatabase.designer.cs">
+      <DependentUpon>202004151142561_InsertArtsDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151257142_AddCryptoWalletToApplicationUser.cs" />
+    <Compile Include="Migrations\202004151257142_AddCryptoWalletToApplicationUser.designer.cs">
+      <DependentUpon>202004151257142_AddCryptoWalletToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151302570_AddCryptoWalletToApplicationUser1.cs" />
+    <Compile Include="Migrations\202004151302570_AddCryptoWalletToApplicationUser1.designer.cs">
+      <DependentUpon>202004151302570_AddCryptoWalletToApplicationUser1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151323575_AddCryptoModelToApplicationUser.cs" />
+    <Compile Include="Migrations\202004151323575_AddCryptoModelToApplicationUser.designer.cs">
+      <DependentUpon>202004151323575_AddCryptoModelToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151337038_AddCryptoModelToApplicationUser1.cs" />
+    <Compile Include="Migrations\202004151337038_AddCryptoModelToApplicationUser1.designer.cs">
+      <DependentUpon>202004151337038_AddCryptoModelToApplicationUser1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004170710188_changedModels.cs" />
+    <Compile Include="Migrations\202004170710188_changedModels.designer.cs">
+      <DependentUpon>202004170710188_changedModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004170745228_changedModel.cs" />
+    <Compile Include="Migrations\202004170745228_changedModel.designer.cs">
+      <DependentUpon>202004170745228_changedModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004190543113_addedCheckOutLogic.cs" />
+    <Compile Include="Migrations\202004190543113_addedCheckOutLogic.designer.cs">
+      <DependentUpon>202004190543113_addedCheckOutLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004242343390_added Creator to Arts.cs" />
+    <Compile Include="Migrations\202004242343390_added Creator to Arts.designer.cs">
+      <DependentUpon>202004242343390_added Creator to Arts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004260513047_Gourl.io files.cs" />
+    <Compile Include="Migrations\202004260513047_Gourl.io files.designer.cs">
+      <DependentUpon>202004260513047_Gourl.io files.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004290622568_Deleted Students and Staffmember Model.cs" />
+    <Compile Include="Migrations\202004290622568_Deleted Students and Staffmember Model.designer.cs">
+      <DependentUpon>202004290622568_Deleted Students and Staffmember Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004301140205_Deleted ID from db Arts.cs" />
+    <Compile Include="Migrations\202004301140205_Deleted ID from db Arts.designer.cs">
+      <DependentUpon>202004301140205_Deleted ID from db Arts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005011825001_Changed Arts Model.cs" />
+    <Compile Include="Migrations\202005011825001_Changed Arts Model.designer.cs">
+      <DependentUpon>202005011825001_Changed Arts Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005021756578_added EndOfLoan to OrderDetail Model.cs" />
+    <Compile Include="Migrations\202005021756578_added EndOfLoan to OrderDetail Model.designer.cs">
+      <DependentUpon>202005021756578_added EndOfLoan to OrderDetail Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005031154301_added artLendPeriod to Cart.cs" />
+    <Compile Include="Migrations\202005031154301_added artLendPeriod to Cart.designer.cs">
+      <DependentUpon>202005031154301_added artLendPeriod to Cart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005031204492_deleted artLendPeriod to Cart.cs" />
+    <Compile Include="Migrations\202005031204492_deleted artLendPeriod to Cart.designer.cs">
+      <DependentUpon>202005031204492_deleted artLendPeriod to Cart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005032221215_changed Model artLend.cs" />
+    <Compile Include="Migrations\202005032221215_changed Model artLend.designer.cs">
+      <DependentUpon>202005032221215_changed Model artLend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005032314584_Updated orderDetail Model.cs" />
+    <Compile Include="Migrations\202005032314584_Updated orderDetail Model.designer.cs">
+      <DependentUpon>202005032314584_Updated orderDetail Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005071032035_added endOfLoan to Model Cart.cs" />
+    <Compile Include="Migrations\202005071032035_added endOfLoan to Model Cart.designer.cs">
+      <DependentUpon>202005071032035_added endOfLoan to Model Cart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005071131451_added endOfLoan to OrderDetail.cs" />
+    <Compile Include="Migrations\202005071131451_added endOfLoan to OrderDetail.designer.cs">
+      <DependentUpon>202005071131451_added endOfLoan to OrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005221310431_Arts changed price to decimal.cs" />
+    <Compile Include="Migrations\202005221310431_Arts changed price to decimal.designer.cs">
+      <DependentUpon>202005221310431_Arts changed price to decimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005221900290_Data annotation ArtLendPeriod Model.cs" />
+    <Compile Include="Migrations\202005221900290_Data annotation ArtLendPeriod Model.designer.cs">
+      <DependentUpon>202005221900290_Data annotation ArtLendPeriod Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005221904469_Data annotation ArtLendPeriod no data annotation.cs" />
+    <Compile Include="Migrations\202005221904469_Data annotation ArtLendPeriod no data annotation.designer.cs">
+      <DependentUpon>202005221904469_Data annotation ArtLendPeriod no data annotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006032233505_Added ProductImage to Arts model.cs" />
+    <Compile Include="Migrations\202006032233505_Added ProductImage to Arts model.designer.cs">
+      <DependentUpon>202006032233505_Added ProductImage to Arts model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006040031302_Removed ProductImage to Arts model.cs" />
+    <Compile Include="Migrations\202006040031302_Removed ProductImage to Arts model.designer.cs">
+      <DependentUpon>202006040031302_Removed ProductImage to Arts model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006040051111_added ImageFile to Arts Model.cs" />
+    <Compile Include="Migrations\202006040051111_added ImageFile to Arts Model.designer.cs">
+      <DependentUpon>202006040051111_added ImageFile to Arts Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006040130366_removed ImageFile from Arts Model.cs" />
+    <Compile Include="Migrations\202006040130366_removed ImageFile from Arts Model.designer.cs">
+      <DependentUpon>202006040130366_removed ImageFile from Arts Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006041634354_Added ID to Arts Model.cs" />
+    <Compile Include="Migrations\202006041634354_Added ID to Arts Model.designer.cs">
+      <DependentUpon>202006041634354_Added ID to Arts Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006041706016_Added Model Art Model to DB.cs" />
+    <Compile Include="Migrations\202006041706016_Added Model Art Model to DB.designer.cs">
+      <DependentUpon>202006041706016_Added Model Art Model to DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006041731196_Deleted Arts Model added Art Model.cs" />
+    <Compile Include="Migrations\202006041731196_Deleted Arts Model added Art Model.designer.cs">
+      <DependentUpon>202006041731196_Deleted Arts Model added Art Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006041841280_Created Arts model.cs" />
+    <Compile Include="Migrations\202006041841280_Created Arts model.designer.cs">
+      <DependentUpon>202006041841280_Created Arts model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006041933559_add Arts to DB.cs" />
+    <Compile Include="Migrations\202006041933559_add Arts to DB.designer.cs">
+      <DependentUpon>202006041933559_add Arts to DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006051401086_Deleted Arts DB.cs" />
+    <Compile Include="Migrations\202006051401086_Deleted Arts DB.designer.cs">
+      <DependentUpon>202006051401086_Deleted Arts DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006051403539_Add Arts table to DB.cs" />
+    <Compile Include="Migrations\202006051403539_Add Arts table to DB.designer.cs">
+      <DependentUpon>202006051403539_Add Arts table to DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006060829595_delete rows in Carts DB.cs" />
+    <Compile Include="Migrations\202006060829595_delete rows in Carts DB.designer.cs">
+      <DependentUpon>202006060829595_delete rows in Carts DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006060848562_delete rows from DB with SQL.cs" />
+    <Compile Include="Migrations\202006060848562_delete rows from DB with SQL.designer.cs">
+      <DependentUpon>202006060848562_delete rows from DB with SQL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006060929303_Changed Orderdetails DB.cs" />
+    <Compile Include="Migrations\202006060929303_Changed Orderdetails DB.designer.cs">
+      <DependentUpon>202006060929303_Changed Orderdetails DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ArtLendPeriod.cs" />
+    <Compile Include="Models\Arts.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\Logic\ShoppingCart.cs" />
+    <Compile Include="Models\Valuta.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CryptoViewModel.cs" />
+    <Compile Include="ViewModel\NewArtsFormViewModel.cs" />
+    <Compile Include="ViewModel\ShoppingCartRemoveViewModel.cs" />
+    <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\all.css" />
+    <Content Include="Content\css\animate.min.css" />
+    <Content Include="Content\css\aos.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\flaticon.css" />
+    <Content Include="Content\css\fontawesome-all.min.css" />
+    <Content Include="Content\css\lightslider.min.css" />
+    <Content Include="Content\css\magnific-popup.css" />
+    <Content Include="Content\css\nice-select.css" />
+    <Content Include="Content\css\owl.carousel.min.css" />
+    <Content Include="Content\css\price_rangs.css" />
+    <Content Include="Content\css\slick-theme.min.css" />
+    <Content Include="Content\css\slick.css" />
+    <Content Include="Content\css\slick.min.css" />
+    <Content Include="Content\css\slicknav.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\swiper.min.css" />
+    <Content Include="Content\css\themify-icons.css" />
+    <Content Include="Content\css\toastr.css" />
+    <Content Include="Content\img\backgroundIndexHome.jpg" />
+    <Content Include="Content\img\logo\Novi-Logo.jpg" />
+    <Content Include="Content\img\logo\Novi.jpg" />
+    <Content Include="Content\js\animated.headline.js" />
+    <Content Include="Content\js\aos.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\cells-by-column.js" />
+    <Content Include="Content\js\contact.js" />
+    <Content Include="Content\js\gmaps.min.js" />
+    <Content Include="Content\js\jquery-1.12.1.min.js" />
+    <Content Include="Content\js\jquery.ajaxchimp.min.js" />
+    <Content Include="Content\js\jquery.counterup.min.js" />
+    <Content Include="Content\js\jquery.downCount.js" />
+    <Content Include="Content\js\jquery.easing.min.js" />
+    <Content Include="Content\js\jquery.form.js" />
+    <Content Include="Content\js\jquery.magnific-popup.js" />
+    <Content Include="Content\js\jquery.nice-select.min.js" />
+    <Content Include="Content\js\jquery.paroller.min.js" />
+    <Content Include="Content\js\jquery.scrollUp.min.js" />
+    <Content Include="Content\js\jquery.slicknav.min.js" />
+    <Content Include="Content\js\jquery.sticky.js" />
+    <Content Include="Content\js\jquery.validate.min.js" />
+    <Content Include="Content\js\lightslider.min.js" />
+    <Content Include="Content\js\mail-script.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\mixitup.min.js" />
+    <Content Include="Content\js\one-page-nav-min.js" />
+    <Content Include="Content\js\owl.carousel.min.js" />
+    <Content Include="Content\js\plugins.js" />
+    <Content Include="Content\js\popper.min.js" />
+    <Content Include="Content\js\price_rangs.js" />
+    <Content Include="Content\js\slick.min.js" />
+    <Content Include="Content\js\stellar.js" />
+    <Content Include="Content\js\swiper.jquery.js" />
+    <Content Include="Content\js\swiper.min.js" />
+    <Content Include="Content\js\swiper_custom.js" />
+    <Content Include="Content\js\theme.js" />
+    <Content Include="Content\js\vendor\jquery-1.12.4.min.js" />
+    <Content Include="Content\js\vendor\modernizr-3.5.0.min.js" />
+    <Content Include="Content\js\waypoints.min.js" />
+    <Content Include="Content\js\wow.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\cryptobox.js" />
+    <Content Include="Scripts\CustomScript.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Content\css\style.map" />
+    <Content Include="Content\css\toastr.less" />
+    <Content Include="Content\css\toastr.scss" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <None Include="Scripts\jquery-3.5.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.5.0.js" />
+    <Content Include="Scripts\jquery-3.5.0.min.js" />
+    <Content Include="Scripts\jquery-3.5.0.slim.js" />
+    <Content Include="Scripts\jquery-3.5.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.5.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.5.0.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Arts\Collection.cshtml" />
+    <Content Include="Views\Shared\_LoginIndex.cshtml" />
+    <Content Include="Views\Arts\ArtsForm.cshtml" />
+    <Content Include="Views\Arts\New.cshtml" />
+    <Content Include="Views\CryptoPayment\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
+    <Content Include="Views\Checkout\Complete.cshtml" />
+    <Content Include="Views\Arts\ArtsLendPeriod.cshtml" />
+    <Content Include="Views\Checkout\Payment.cshtml" />
+    <Content Include="Views\Checkout\PaymentError.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Image\ArtsCollection\" />
+    <Folder Include="Image\Home\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202004140230551_InitialCreate.resx">
+      <DependentUpon>202004140230551_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151123331_AddedModelsStaffmemberAndStudents.resx">
+      <DependentUpon>202004151123331_AddedModelsStaffmemberAndStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151128334_Delete-PasswordFromUsersModel.resx">
+      <DependentUpon>202004151128334_Delete-PasswordFromUsersModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151137479_CheckChanges.resx">
+      <DependentUpon>202004151137479_CheckChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151142041_artsModelAddedToDatabase.resx">
+      <DependentUpon>202004151142041_artsModelAddedToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151142561_InsertArtsDatabase.resx">
+      <DependentUpon>202004151142561_InsertArtsDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151257142_AddCryptoWalletToApplicationUser.resx">
+      <DependentUpon>202004151257142_AddCryptoWalletToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151302570_AddCryptoWalletToApplicationUser1.resx">
+      <DependentUpon>202004151302570_AddCryptoWalletToApplicationUser1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151323575_AddCryptoModelToApplicationUser.resx">
+      <DependentUpon>202004151323575_AddCryptoModelToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151337038_AddCryptoModelToApplicationUser1.resx">
+      <DependentUpon>202004151337038_AddCryptoModelToApplicationUser1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004170710188_changedModels.resx">
+      <DependentUpon>202004170710188_changedModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004170745228_changedModel.resx">
+      <DependentUpon>202004170745228_changedModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004190543113_addedCheckOutLogic.resx">
+      <DependentUpon>202004190543113_addedCheckOutLogic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004242343390_added Creator to Arts.resx">
+      <DependentUpon>202004242343390_added Creator to Arts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004260513047_Gourl.io files.resx">
+      <DependentUpon>202004260513047_Gourl.io files.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004290622568_Deleted Students and Staffmember Model.resx">
+      <DependentUpon>202004290622568_Deleted Students and Staffmember Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004301140205_Deleted ID from db Arts.resx">
+      <DependentUpon>202004301140205_Deleted ID from db Arts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005011825001_Changed Arts Model.resx">
+      <DependentUpon>202005011825001_Changed Arts Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005021756578_added EndOfLoan to OrderDetail Model.resx">
+      <DependentUpon>202005021756578_added EndOfLoan to OrderDetail Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005031154301_added artLendPeriod to Cart.resx">
+      <DependentUpon>202005031154301_added artLendPeriod to Cart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005031204492_deleted artLendPeriod to Cart.resx">
+      <DependentUpon>202005031204492_deleted artLendPeriod to Cart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005032221215_changed Model artLend.resx">
+      <DependentUpon>202005032221215_changed Model artLend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005032314584_Updated orderDetail Model.resx">
+      <DependentUpon>202005032314584_Updated orderDetail Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005071032035_added endOfLoan to Model Cart.resx">
+      <DependentUpon>202005071032035_added endOfLoan to Model Cart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005071131451_added endOfLoan to OrderDetail.resx">
+      <DependentUpon>202005071131451_added endOfLoan to OrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005221310431_Arts changed price to decimal.resx">
+      <DependentUpon>202005221310431_Arts changed price to decimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005221900290_Data annotation ArtLendPeriod Model.resx">
+      <DependentUpon>202005221900290_Data annotation ArtLendPeriod Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005221904469_Data annotation ArtLendPeriod no data annotation.resx">
+      <DependentUpon>202005221904469_Data annotation ArtLendPeriod no data annotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006032233505_Added ProductImage to Arts model.resx">
+      <DependentUpon>202006032233505_Added ProductImage to Arts model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006040031302_Removed ProductImage to Arts model.resx">
+      <DependentUpon>202006040031302_Removed ProductImage to Arts model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006040051111_added ImageFile to Arts Model.resx">
+      <DependentUpon>202006040051111_added ImageFile to Arts Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006040130366_removed ImageFile from Arts Model.resx">
+      <DependentUpon>202006040130366_removed ImageFile from Arts Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006041634354_Added ID to Arts Model.resx">
+      <DependentUpon>202006041634354_Added ID to Arts Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006041706016_Added Model Art Model to DB.resx">
+      <DependentUpon>202006041706016_Added Model Art Model to DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006041731196_Deleted Arts Model added Art Model.resx">
+      <DependentUpon>202006041731196_Deleted Arts Model added Art Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006041841280_Created Arts model.resx">
+      <DependentUpon>202006041841280_Created Arts model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006041933559_add Arts to DB.resx">
+      <DependentUpon>202006041933559_add Arts to DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006051401086_Deleted Arts DB.resx">
+      <DependentUpon>202006051401086_Deleted Arts DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006051403539_Add Arts table to DB.resx">
+      <DependentUpon>202006051403539_Add Arts table to DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006060829595_delete rows in Carts DB.resx">
+      <DependentUpon>202006060829595_delete rows in Carts DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006060848562_delete rows from DB with SQL.resx">
+      <DependentUpon>202006060848562_delete rows from DB with SQL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006060929303_Changed Orderdetails DB.resx">
+      <DependentUpon>202006060929303_Changed Orderdetails DB.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64585</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44364/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

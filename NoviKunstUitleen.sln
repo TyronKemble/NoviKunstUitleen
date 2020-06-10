@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoviKunstUitleen", "NoviKunstUitleen\NoviKunstUitleen.csproj", "{99AA1CA9-98A8-4CD2-8D12-31D4BB2661DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99AA1CA9-98A8-4CD2-8D12-31D4BB2661DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99AA1CA9-98A8-4CD2-8D12-31D4BB2661DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99AA1CA9-98A8-4CD2-8D12-31D4BB2661DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99AA1CA9-98A8-4CD2-8D12-31D4BB2661DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DAF6240C-AEE7-498B-920E-CBB255969237}
+	EndGlobalSection
+EndGlobal

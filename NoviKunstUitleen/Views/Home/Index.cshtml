@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="~/Content/img/logo/Novi.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+<main>
+    <!-- slider Area Start -->
+    <div class="slider-area ">
+        <!-- Mobile Menu -->
+        <div class="slider-active">
+            <div class="single-slider slider-height" data-background=@Url.Content("~/Content/img/backgroundIndexHome.jpg")>
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
+                            <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                                <img src="~/Image/Home/Home-Index-Wallpapeer.jpg"alt="Welcome to NOVI">
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                            <div class="hero__caption">
+                                <span data-animation="fadeInRight" data-delay=".4s">NOVI</span>
+                                <h1 data-animation="fadeInRight" data-delay=".6s">Kunst <br> Uitleen</h1>
+                                <p data-animation="fadeInRight" data-delay=".8s">Kunst is voor iedereen</p>
+                                <!-- Hero-btn -->
+                                <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                    @Html.Partial("_LoginIndex")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
