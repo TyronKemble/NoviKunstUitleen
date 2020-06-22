@@ -669,14 +669,14 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Arts\Collection.cshtml" />
     <Content Include="Views\Shared\_LoginIndex.cshtml" />
-    <Content Include="Views\Arts\ArtsForm.cshtml" />
+    <Content Include="Views\Arts\ArtsEdit.cshtml" />
     <Content Include="Views\Arts\New.cshtml" />
     <Content Include="Views\CryptoPayment\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
     <Content Include="Views\Arts\ArtsLendPeriod.cshtml" />
-    <Content Include="Views\Checkout\Payment.cshtml" />
+    <Content Include="Views\Checkout\PaymentIndex.cshtml" />
     <Content Include="Views\Checkout\PaymentError.cshtml" />
   </ItemGroup>
   <ItemGroup>

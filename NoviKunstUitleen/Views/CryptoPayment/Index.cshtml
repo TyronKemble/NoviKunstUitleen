@@ -10,7 +10,6 @@
     $(document).ready(function () {
         $(".depositCrypto").click(function () {
             userName = $(this).val();
-            console.log("test")
             $.get("/CryptoPayment/Deposit", { "userName": userName},
                 function () {
                         window.location.reload();
@@ -46,8 +45,7 @@
                     }
                 })
                     } else {
-                        // Show error message to screen
-                        console.log('error')
+                    document.getElementById("outputETH").innerHTML= "Unable to retrie";
                     }
         var num = valNum*value[0]; 
         document.getElementById("outputETH").innerHTML=num.toFixed(2);

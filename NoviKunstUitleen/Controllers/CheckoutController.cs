@@ -21,6 +21,10 @@ namespace NoviKunstUitleen.Controllers
     public class CheckoutController : Controller
     {
         private ApplicationDbContext _context;
+        private readonly string privateETHSender = "54b95bf755be54758e9617d636bc745215f29f14e08fa6bbc0ab307b652a6c3a";
+        private readonly string web3Url = "https://ropsten.infura.io/v3/cc7d9b90b1964ada9f24467dc0f0f780";
+        private readonly string studentETHAddress = "0x28C5524Cb44062eDcf7fCb5d78F39B8B80aeF4d4";
+        private readonly string staffMemberETHAddress = "0xc3202910De95C5B34c43B39E8178b35D4b45c8bB";
 
         public CheckoutController()
         {
@@ -57,114 +61,68 @@ namespace NoviKunstUitleen.Controllers
             }
             else
             {
-                return RedirectToAction("Payment");
+                return RedirectToAction("PaymentIndex");
             }
         }
 
-        public ActionResult Payment()
+        public ActionResult PaymentIndex()
         {
 
-            // totale prijs moet ik hebben
+            // Get total price
             var cart = ShoppingCart.GetCart(this.HttpContext);
             var cartTotal = cart.GetTotal();
+
+            // Get total Cart Items
             var cartItemsWithID = cart.GetCartItems().ToList();
+
+            // Get current Art creator from cart
             var artsCreator = "";
             foreach (var item in cartItemsWithID)
             {
                 artsCreator = item.Arts.Creator;
             }
-            // welk Eth adres het moet worden verzonden wie is de creator
-            var userCreator = _context.Users.FirstOrDefault(a => a.UserName == artsCreator).CryptoWallet;
 
-            // wat is het ETh adres van de creator 
+            // Get eth adres of artCreator
+            var userCreator = _context.Users.FirstOrDefault(a => a.UserName == artsCreator)
+                .CryptoWallet;
 
             var result = new CryptoViewModel
             {
                 TotalAmount = cartTotal,
                 SendEthToAdress = userCreator,
             };
-            //Eventueel totalbalance aangeven gebruiker
-            // 
+
             return View(result);
 
         }
 
-        public async Task<bool> GetCurrentEuroValue()
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://api.coingecko.com/api/v3/coins/ethereum/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var euroValue = 0;
-                using (WebClient wc = new WebClient())
-                {
-                    var json = wc.DownloadString("https://api.coingecko.com/api/v3/coins/ethereum/tickers");
-             
-                // HTTP GET
-                var responseTask = client.GetAsync("tickers");
-                responseTask.Wait();
-                    List<string> list = new List<string>();
-                    var result = responseTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-                        var readTask = JsonConvert.DeserializeObject<dynamic>(json);
-                        var name = readTask.tickers;
-                        foreach (var item in readTask.tickers)
-                        {
-                            if (item.target == "Eur")
-                            {
-                                euroValue = item.last;
-                            }
-                        }
-
-                        Console.WriteLine(euroValue);
-                }
-
-                }
-            }
-
-            return true;
-        }
-
-        public ActionResult PaymentCheck()
+        public ActionResult PaymentValid()
         {
             var order = (Order)Session["order"];
             
             order.Username = User.Identity.Name;
             order.OrderDate = DateTime.Now;
-
-            //Save Order
             _context.Orders.Add(order);
 
-            //Process the order
+            //Process the order / Creator order
             var cart = ShoppingCart.GetCart(this.HttpContext);
             cart.CreateOrder(order);
 
-            //return Json(new { url = Url.Action("Complete", "checkout", new { id = order.OrderId }) });
             return RedirectToAction("Complete",
                 new { id = order.OrderId });
         }
 
-        public ActionResult Test()
-        {
-            return RedirectToAction("Complete",
-                new { id = 10});
-        }
-
+        // Function checks of payment 
         public async Task<ActionResult> CheckPayment()
-            {
-            //https://stackoverflow.com/questions/185208/how-do-i-get-and-set-environment-variables-in-c
-            // https://faucet.ropsten.be/ - Eth
-
+        {
             var cart = ShoppingCart.GetCart(this.HttpContext);
-            // total cart price
+            // Get total cart price
             var totalCartValue = cart.GetTotal();
 
-            // Get current User ETH adres of payment
+            // Get current user ETH adres of payment
             var currentUserCrypto = _context.Users.FirstOrDefault(c => c.UserName == User.Identity.Name).CryptoWallet;
 
-            // welk Eth adres het moet worden verzonden wie is de creator
+            // Get eth adres of artCreator
             var cartItemsWithID = cart.GetCartItems().ToList();
             var artsCreator = "";
             foreach (var item in cartItemsWithID)
@@ -175,28 +133,30 @@ namespace NoviKunstUitleen.Controllers
 
             // Convert total value to eth WITH API
             decimal ethValue = totalCartValue;
-            // Send to ETH adres 
 
+
+                                                // Send to ETH adres section /// 
             // Save private key in enviroment variable - Zoek uit
-            var privateKey = "54b95bf755be54758e9617d636bc745215f29f14e08fa6bbc0ab307b652a6c3a";
-            var account = new Account(privateKey);
+            var account = new Account(privateETHSender);
             //Now let's create an instance of Web3 using our account pointing to our nethereum testchain
-            var web3 = new Web3(account, "https://ropsten.infura.io/v3/cc7d9b90b1964ada9f24467dc0f0f780");
+            var web3 = new Web3(account, web3Url);
 
             // Check the balance of the account we are going to send the Ether
-            var balanceFromSender = await web3.Eth.GetBalance.SendRequestAsync("0x28C5524Cb44062eDcf7fCb5d78F39B8B80aeF4d4");
+            var balanceFromSender = await web3.Eth.GetBalance.SendRequestAsync(studentETHAddress);
             if (Web3.Convert.FromWei(balanceFromSender.Value) > ethValue)
             {
                 // Lets transfer 1.11 Ether
                 var transaction = await web3.Eth.GetEtherTransferService()
-                    .TransferEtherAndWaitForReceiptAsync("0xc3202910De95C5B34c43B39E8178b35D4b45c8bB", ethValue);
-                return RedirectToAction("PaymentCheck");
+                    .TransferEtherAndWaitForReceiptAsync(staffMemberETHAddress, ethValue);
+
+                return RedirectToAction("PaymentValid");
             }
             else
             {
                 return RedirectToAction("PaymentError");
             }
 
+                                                // End send to ETH adres section //
         }
 
         public ActionResult PaymentError()
@@ -206,25 +166,21 @@ namespace NoviKunstUitleen.Controllers
 
         // GET: /Checkout/Complete
         public ActionResult Complete(int id)
-            {
-                // Validate customer owns this order
-                bool isValid = _context.Orders.Any(
-                    o => o.OrderId == id &&
-                    o.Username == User.Identity.Name);
+        {
+            // Validate customer owns this order
+            bool isValid = _context.Orders.Any(
+                o => o.OrderId == id &&
+                o.Username == User.Identity.Name);
 
-                if (isValid)
-                {
+            if (isValid)
+            {
 
                 return View(id);
-                }
-                else
-                {
-                     return View("Error");
-                }
             }
-
-
+            else
+            {
+                return View("Error");
+            }
+        }
     }
-
-
 }

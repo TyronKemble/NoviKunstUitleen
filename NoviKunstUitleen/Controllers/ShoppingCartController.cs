@@ -74,7 +74,7 @@ namespace NoviKunstUitleen.Controllers
             return RedirectToAction("AddressAndPayment", "Checkout");
         }
 
-        // AJAX: /ShoppingCart/RemoveFromCart/5
+        // /ShoppingCart/RemoveFromCart/5
         [HttpPost]
         public ActionResult RemoveFromCart(int id)
         {
@@ -102,7 +102,7 @@ namespace NoviKunstUitleen.Controllers
             return Json(results);
         }
 
-        //
+        
         // GET: /ShoppingCart/CartSummary
         [ChildActionOnly]
         public ActionResult CartSummary()

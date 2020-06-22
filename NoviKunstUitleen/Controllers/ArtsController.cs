@@ -17,7 +17,7 @@ namespace NoviKunstUitleen.Controllers
     public class ArtsController : Controller
     {
         private ApplicationDbContext _context;
-
+        private readonly string mapPathPictures = "~/Image/ArtsCollection/";
         public ArtsController()
         {
             _context = new ApplicationDbContext();
@@ -65,24 +65,17 @@ namespace NoviKunstUitleen.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save( Arts art)
         {
-            //get profile photo.
+            Random random = new Random();
+
+            //get picture.
             var upload = Request.Files["Image"];
-            var fileName = Path.Combine(Server.MapPath("~/Image/ArtsCollection"), upload.FileName);
+            Random randomN = new Random();
+           
+            var fileName = Path.Combine(Server.MapPath(mapPathPictures), upload.FileName);
             if (upload.ContentLength > 0)
             {
                 upload.SaveAs(fileName);
             }
-
-            //if (!ModelState.IsValid)
-            //{
-            //    var viewModel = new NewArtsFormViewModel
-            //    {
-            //        Art = art
-            //    };
-
-            //    return View("New", viewModel);
-            //}
-
 
             if (art.ArtsId == 0)
             {
@@ -91,7 +84,7 @@ namespace NoviKunstUitleen.Controllers
                 {
 
                     Name = art.Name,
-                    Image = "~/Image/ArtsCollection/" + upload.FileName,
+                    Image = mapPathPictures + upload.FileName,
                     NumbersInStock = art.NumbersInStock,
                     NumbersAvailable = art.NumbersInStock,
                     DateAdded = art.DateAdded,
@@ -119,6 +112,39 @@ namespace NoviKunstUitleen.Controllers
 
         }
 
+        [Authorize(Roles = "Staffmember")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveEditedArt(Arts art)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(art);
+            }
+            
+            var ArtinDB = _context.Arts.Single(a => a.ArtsId == art.ArtsId);
+            ArtinDB.Name = art.Name;
+            ArtinDB.Image = art.Image;
+            ArtinDB.NumbersInStock = art.NumbersInStock;
+            ArtinDB.Price = art.Price;
+            ArtinDB.Creator = art.Creator;
+            ArtinDB.DateAdded = art.DateAdded;
+
+            _context.SaveChanges();
+            return RedirectToAction("Collection", "Arts");
+
+        }
+
+        public ActionResult DeleteArt(Arts art)
+        {
+
+            var ArtinDB = _context.Arts.Single(a => a.ArtsId == art.ArtsId);
+            _context.Arts.Remove(ArtinDB);
+            _context.SaveChanges();
+            return RedirectToAction("Collection", "Arts");
+
+        }
+
         [Authorize(Roles= "Staffmember")]
         public ActionResult Edit(int id)
         {
@@ -131,7 +157,8 @@ namespace NoviKunstUitleen.Controllers
             {
                 Art = art
             };
-            return View("ArtsForm",artViewModel);
+
+            return View("ArtsEdit",artViewModel);
         }
 
     }

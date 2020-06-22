@@ -30,6 +30,7 @@ namespace NoviKunstUitleen.Controllers
         {
             return RedirectToAction("Index", "CryptoPayment");
         }
+
         public ApplicationSignInManager SignInManager
         {
             get

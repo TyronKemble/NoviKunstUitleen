@@ -6,15 +6,14 @@
     <div class="container">
         <h2>@ViewBag.Title</h2>
 
-        @using (Html.BeginForm("Save", "Arts"))
+        @using (Html.BeginForm("SaveEditedArt", "Arts"))
         {
             <div class="form-group">
                 @Html.LabelFor(m => m.Art.Name)
                 @Html.TextBoxFor(m => m.Art.Name, new { @class = "form-control" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Art.Image)
-                @Html.TextBoxFor(m => m.Art.Image, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Art.Image, new { type="hidden", @class = "form-control" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Art.Price)
@@ -25,15 +24,23 @@
                 @Html.TextBoxFor(m => m.Art.NumbersInStock, new { @class = "form-control" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Art.DateAdded)
-                @Html.TextBoxFor(m => m.Art.DateAdded, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Art.DateAdded, new {type="hidden", @class = "form-control" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Art.Creator)
-                @Html.TextBoxFor(m => m.Art.Creator, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Art.Creator, new {type="hidden", @class = "form-control" })
             </div>
             @Html.HiddenFor(m => m.Art.ArtsId)
             @Html.AntiForgeryToken()
             <button type="submit" class="btn btn-primary">Save</button>
         }
+    </div>
+    <br />
+    <div class="container">
+        @using (Html.BeginForm("DeleteArt", "Arts"))
+        {
+        @Html.HiddenFor(m => m.Art.ArtsId)
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Delete</button>
+        }
+
     </div>
