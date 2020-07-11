@@ -52,7 +52,7 @@ namespace NoviKunstUitleen.Controllers
             var results = new CryptoViewModel
             {
                 UserName = user.Email,
-                CryptoWallet = etherAmount
+                CryptoWalletValue = etherAmount
             };
 
             return View(results);
@@ -74,13 +74,14 @@ namespace NoviKunstUitleen.Controllers
             // Get balance of user to deposit.
             var balance = await web3.Eth.GetBalance.SendRequestAsync(user.CryptoWallet);
 
-            // Get eth from Ropsten test network
+            //// Get eth from Ropsten test network
             var url = depositToRopsten + user.CryptoWallet;
             var client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(url);
             if (!response.IsSuccessStatusCode)
             {
-                return View("false");
+
+                return Content("False");
             }
 
             // Get current ETH after deposit from Ropsten.
@@ -91,7 +92,7 @@ namespace NoviKunstUitleen.Controllers
             var results = new CryptoViewModel
             {
                 UserName = user.Email,
-                CryptoWallet = BalanceAfterDeposit
+                CryptoWalletValue = BalanceAfterDeposit
             };
 
             return RedirectToAction("Index", results);
@@ -122,7 +123,7 @@ namespace NoviKunstUitleen.Controllers
                 var results = new CryptoViewModel
                 {
                     UserName = currentUser.Email,
-                    CryptoWallet = BalanceAfterDeposit
+                    CryptoWalletValue = BalanceAfterDeposit
                 };
 
                 return RedirectToAction("Index", results);

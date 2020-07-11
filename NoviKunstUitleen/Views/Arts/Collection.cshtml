@@ -91,16 +91,13 @@
  @section Scripts {
 <script type="text/javascript">
 
-    //function preventBack(){window.history.forward();}
-    //setTimeout("preventBack()");
-    //        window.onunload = function () { null };
+
     $(document).ready(function () {
         $(".ArtSelection").on('click', function () {
             artId = $(this).val();
             $("#myArt").load("/Arts/ArtsLendPeriod", { id: artId },
                 function (data) {
                     $('.myModal').modal("show");
-                    console.log(data)
                 }
             )
 

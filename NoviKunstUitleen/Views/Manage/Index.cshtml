@@ -1,6 +1,6 @@
 ﻿@model NoviKunstUitleen.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Manage Crypto";
 }
 
 
@@ -8,22 +8,8 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div class="container">
     <h2>@ViewBag.Title.</h2>
-    <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
         <dt>CryptoWallet:</dt>
         <dd>
             <div class="form-group">

@@ -8,11 +8,31 @@
 @section Scripts {
 <script type="text/javascript">
     $(document).ready(function () {
+
+    $("#alerts").hide();
+        $(".checkoutAlert").click(function () {
+            $("#alerts").show();
+        })
+
+        $(".btnFetch").click(function() {
+            // disable button
+            $(this).prop("disabled", true);
+            // add spinner to button
+            $(this).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+            );
+         });
+
         $(".depositCrypto").click(function () {
             userName = $(this).val();
             $.get("/CryptoPayment/Deposit", { "userName": userName},
-                function () {
+                function (data) {
+                    if (data == "False") {
+                        document.getElementById("ErrorMessageApi").innerHTML = "Unable to Deposit please try again later";
+                    } else {
                         window.location.reload();
+                    }
+                  
                 }
             ); 
         })
@@ -34,7 +54,7 @@
     var request = new XMLHttpRequest()
     function EthToEuroConverter(valNum) {
         request.open('GET', 'https://api.coingecko.com/api/v3/coins/ethereum/tickers', true)
-        request.onload = function() {
+        request.onload = function () {
         // Begin accessing JSON data here
         var data = JSON.parse(this.response)
         if (request.status >= 200 && request.status < 400) {
@@ -45,7 +65,7 @@
                     }
                 })
                     } else {
-                    document.getElementById("outputETH").innerHTML= "Unable to retrie";
+                        document.getElementById("outputETH").innerHTML = "Unable to retrieve ETH to Euro information ";
                     }
         var num = valNum*value[0]; 
         document.getElementById("outputETH").innerHTML=num.toFixed(2);
@@ -57,7 +77,7 @@
 }
 <div class="container">
     <h2>Hello @Model.UserName</h2>
-    <h3>Current Value: @Model.CryptoWallet </h3>
+    <h3>Current Value: @Model.CryptoWalletValue </h3>
     <h5>Choose one of the options</h5>
     <br />
     <div class="row">
@@ -70,14 +90,16 @@
         <div class="col">
             <h3>Deposit</h3>
             <p>1 Eth per deposit</p>
-            <button class="depositCrypto btn btn-success" href="" value="@User.Identity.Name">Deposit </button>
+            <button class="depositCrypto btn btn-success checkoutAlert btnFetch" href="" value="@User.Identity.Name" >Deposit </button>
+            <p id="ErrorMessageApi"></p>
         </div>
         <div class="col">
             <h3>WithDraw</h3>
             <p>Please enter the eth amount</p>
             <input placeholder="Example 0.11" id="WithDrawAmount" value="" />
-            <button class="withDrawCrypto btn btn-success" href="" value="@User.Identity.Name">WithDraw </button>
-            <strong hidden id="loading">Loading...</strong>
+            <br />
+            <br />
+            <button class="withDrawCrypto btn btn-success checkoutAlert btnFetch" href="" value="@User.Identity.Name">WithDraw </button>
         </div>
     </div>
 </div>
