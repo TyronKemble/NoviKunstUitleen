@@ -43,49 +43,6 @@
                     });
                 });
             });
-            // Uitleg 3 maanden
-            //https://www.google.com/search?source=hp&ei=pUecXuLYDYySsAfNn4K4Cw&q=datepicker+%2B3months&oq=datepicker+%2B3months&gs_lcp=CgZwc3ktYWIQAzoCCAA6BQgAEIMBOgYIABAWEB5QtgJY5ilgsytoAXAAeACAAZQBiAHwBpIBBDE5LjGYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwiiv-OhwvToAhUMCewKHc2PALcQ4dUDCAc&uact=5
-
-            $(function () {
-                $(".from").datepicker({
-                    minDate: "dateToday",
-                    changeMonth: true,
-                    dateFormat: 'dd-mm-yy',
-                    onClose: function (selectedDateFrom, instance) {
-                        if (selectedDateFrom != '') {
-                            $(".to").datepicker("option", "minDate", selectedDateFrom);
-                            var date = $.datepicker.parseDate(instance.settings.dateFormat, selectedDateFrom, instance.settings);
-                            date.setMonth(date.getMonth() + 3);
-
-                            $(".to").datepicker("option", "minDate", date);
-                            var dateMonth = $.datepicker.parseDate(instance.settings.dateFormat, selectedDateFrom, instance.settings);
-                            dateMonth.setMonth(date.getMonth() + 12);
-                            $(".to").datepicker("option", "maxDate", dateMonth);
-                        }
-                    }
-                });
-                $(".to").datepicker({
-                    minDate: "dateToday",
-                    changeMonth: true,
-                    dateFormat: 'dd-mm-yy',
-                    onClose: function (selectedDateTo) {
-                        $(".from").datepicker("option", "maxDate");
-                    }
-                });
-
-            });
-            function getDate(element) {
-                var date;
-                try {
-                    date = $.datepicker.parseDate(dateFormat, element.value);
-                } catch (error) {
-                    date = null;
-                }
-
-                return date;
-            }
-
-
         </script>
     </head>
 

@@ -8,11 +8,11 @@
         $("#Mybuttons").click(function () {
             if ($('.to').val() == '') {
                    event.preventDefault();
-                   alert('To Input can not be left blank');
+                   alert('Input can not be left blank');
                } else {
                     $.post("/ShoppingCart/AddToCart", { endOfLoan: $(".to").val(), id: $("#myArtsId").val() },
                         function () {
-                            $("#testterr").fadeIn("3000")
+                            $("#ArtAddedToChart").fadeIn("3000")
 
                         }
                     );
@@ -20,8 +20,8 @@
 
         })
     });
-    // Uitleg 3 maanden
-    //https://www.google.com/search?source=hp&ei=pUecXuLYDYySsAfNn4K4Cw&q=datepicker+%2B3months&oq=datepicker+%2B3months&gs_lcp=CgZwc3ktYWIQAzoCCAA6BQgAEIMBOgYIABAWEB5QtgJY5ilgsytoAXAAeACAAZQBiAHwBpIBBDE5LjGYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwiiv-OhwvToAhUMCewKHc2PALcQ4dUDCAc&uact=5
+ 
+
 
     $(function () {
         $(".from").datepicker({

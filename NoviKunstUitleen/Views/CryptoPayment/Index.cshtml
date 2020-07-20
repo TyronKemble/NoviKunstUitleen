@@ -25,7 +25,7 @@
 
         $(".depositCrypto").click(function () {
             userName = $(this).val();
-            $.get("/CryptoPayment/Deposit", { "userName": userName},
+            $.get("/CryptoPayment/Deposit",
                 function (data) {
                     if (data == "False") {
                         document.getElementById("ErrorMessageApi").innerHTML = "Unable to Deposit please try again later";

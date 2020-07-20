@@ -45,7 +45,7 @@ namespace NoviKunstUitleen.Controllers
         // GET: /Store/AddToCart/5
         public ActionResult AddToCart(string endOfLoan, int id)
         {
-            // Retrieve the album from the database
+            // Retrieve the Art from the database
             var addedArt = _context.Arts.Single(a => a.ArtsId == id);
 
             // Add it to the shopping cart

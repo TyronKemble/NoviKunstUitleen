@@ -24,7 +24,7 @@ namespace NoviKunstUitleen.Controllers
         private readonly string privateETHSender = "54b95bf755be54758e9617d636bc745215f29f14e08fa6bbc0ab307b652a6c3a";
         private readonly string web3Url = "https://ropsten.infura.io/v3/cc7d9b90b1964ada9f24467dc0f0f780";
         private readonly string studentETHAddress = "0x28C5524Cb44062eDcf7fCb5d78F39B8B80aeF4d4";
-        private readonly string staffMemberETHAddress = "0xc3202910De95C5B34c43B39E8178b35D4b45c8bB";
+
 
         public CheckoutController()
         {
@@ -131,23 +131,23 @@ namespace NoviKunstUitleen.Controllers
             }
             var creatorCrypto = _context.Users.FirstOrDefault(a => a.UserName == artsCreator).CryptoWallet;
 
-            // Convert total value to eth WITH API
+            // Convert total value to eth 
             decimal ethValue = totalCartValue;
 
 
                                                 // Send to ETH adres section /// 
             // Save private key in enviroment variable - Zoek uit
             var account = new Account(privateETHSender);
-            //Now let's create an instance of Web3 using our account pointing to our nethereum testchain
+            // An instance of Web3 using our account pointing to our nethereum testchain
             var web3 = new Web3(account, web3Url);
 
             // Check the balance of the account we are going to send the Ether
             var balanceFromSender = await web3.Eth.GetBalance.SendRequestAsync(studentETHAddress);
             if (Web3.Convert.FromWei(balanceFromSender.Value) > ethValue)
             {
-                // Lets transfer 1.11 Ether
+                // ETH transfer to adres
                 var transaction = await web3.Eth.GetEtherTransferService()
-                    .TransferEtherAndWaitForReceiptAsync(staffMemberETHAddress, ethValue);
+                    .TransferEtherAndWaitForReceiptAsync(creatorCrypto, ethValue);
 
                 return RedirectToAction("PaymentValid");
             }

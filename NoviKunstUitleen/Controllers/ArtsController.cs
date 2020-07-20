@@ -16,7 +16,7 @@ namespace NoviKunstUitleen.Controllers
     [Authorize]
     public class ArtsController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly string mapPathPictures = "~/Image/ArtsCollection/";
         public ArtsController()
         {
